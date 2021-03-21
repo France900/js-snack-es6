@@ -33,7 +33,7 @@ const gatti = [
 console.log(gatti);
 
 gatti.forEach((item, i, array) => {
-  console.log(`${item.nome} è di colore ${item.colore}`);
+  // console.log(`${item.nome} è di colore ${item.colore}`);
   // $("ul").append(`<li>${item.nome} è di colore ${item.colore}</li>`)
 });
 
@@ -46,16 +46,16 @@ var gattiFemmina = gatti.filter((item) => item.sesso == "femmina")
 
 gattiFemmina.forEach((item, i, array) => {
   let opacity;
-  $(".female").css("color", "red")
   if (item.eta > 10) {
     opacity = "opacity2"
   } else if (item.eta <= 10) {
     opacity = "opacity1"
   }
-  console.log(`${item.nome} è di colore ${item.colore} ed è femmina devi aggiungere il fiocco`);
-  $("ul").append(`<li>${item.nome} è di colore ${item.colore} ed è ${item.sesso} con ${item.eta}<i class="fas fa-ribbon female ${opacity}"></i></li>`)
+  // console.log(`${item.nome} è di colore ${item.colore} ed è femmina devi aggiungere il fiocco`);
+  $("ul").append(`<li>${item.nome} è di colore ${item.colore} ed è ${item.sesso} con età ${item.eta}<i class="fas fa-ribbon female ${opacity}"></i></li>`)
+  $(".female").css("color", "red")
 });
-
+// perche il porcaputtana funziona cosi ma se lo sposto no.
 
 
 
@@ -64,12 +64,16 @@ gattiFemmina.forEach((item, i, array) => {
 var gattiMaschio = gatti.filter((item) => item.sesso == "maschio")
 
 gattiMaschio.forEach((item, i, array) => {
-  console.log(`${item.nome} è di colore ${item.colore} ed è maschio devi aggiungere il fiocco`);
-  $("ul").append(`<li>${item.nome} è di colore ${item.colore} ed è ${item.sesso} <i class="fas fa-ribbon male"></i></li>`)
-
+  let opacity;
+  if (item.eta > 10) {
+    opacity = "opacity2"
+  } else if (item.eta <= 10) {
+    opacity = "opacity1"
+  }
+  // console.log(`${item.nome} è di colore ${item.colore} ed è maschio devi aggiungere il fiocco`);
+  $("ul").append(`<li>${item.nome} è di colore ${item.colore} ed è ${item.sesso} con età ${item.eta}<i class="fas fa-ribbon male ${opacity}"></i></li>`)
 });
-
-$(".male").css("color", "lightblue")
+$(".male").css("color", "blue")
 
 
 // Milestone 3
@@ -77,6 +81,23 @@ $(".male").css("color", "lightblue")
 // inserendo solamente nome e colore e colore e opacità del fiocco per ogni gatto.
 
 // concateno gli arrai femmina maschio con ...
+var nuova = [...gattiFemmina,...gattiMaschio]
+
+nuova.forEach((item, index) => {
+  //inserire negli oggetti valore opacità.
+  if (item.eta > 10) {
+    // nuova.opacita = 4 è sbagliato perche h preso l'arrai non l'oggetto
+    item.opacità = 1
+  } else if (item.eta <= 10) {
+    item.opacità = 0.5
+  }
+  //sottrarre i valori dell'oggetto che non servono
+  delete item.eta;
+  delete item.sesso;
+});
+console.log(nuova);
+// perche mi cambia il log dei gatti in cima?? ---------------------------------------------------------------------------------
+
 
 // FUNZIONI
 function dice(min, max) {
